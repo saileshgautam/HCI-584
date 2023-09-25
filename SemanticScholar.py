@@ -39,7 +39,7 @@ def save_to_csv(papers, filename):
             })
 
 if __name__ == "__main__":
-    author_name = 'John'
+    author_name = 'Gilbert'
     papers = search_papers_by_author(author_name)
 
     if papers:
