@@ -7,7 +7,7 @@ def search_papers_by_author(author_name):
     base_url = 'https://api.semanticscholar.org/graph/v1/author/'
     headers = {
         'Accept': 'application/json',
-        'Hx-api-key': API_KEY
+        'x-api-key': API_KEY
     }
 
     params = {
