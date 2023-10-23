@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semantic Scholar Papers by Author</title>
+</head>
+<body>
+    <h1>Find Papers by Author</h1>
+    <form method="POST">
+        <label for="author_name">Author Name:</label>
+        <input type="text" name="author_name" value="{{ author_name }}" required>
+        <button type="submit">Search</button>
+    </form>
+    {% if papers_info %}
+    <h2>Papers:</h2>
+    <ul>
+        {% for title, abstract in papers_info %}
+        <li>
+            <h3>Title: {{ title }}</h3>
+            <p>Abstract: {{ abstract }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No papers found for the author.</p>
+    {% endif %}
+</body>
+</html>
+This code retrieves both the titles and abstracts of all the papers for the given author and displays them in the index.html template. Each paper is displayed with its title and abstract.
+
+
+
+
+
