@@ -53,9 +53,9 @@ def index():
     if request.method == "POST":
         author_name = request.form["author_name"]
         papers = search_paper_by_author(author_name)
-        html = render_template("index.html", paper_info=papers)
+        html = render_template("index2.html", paper_info=papers)
         return html
-    return render_template("index.html")
+    return render_template("index2.html")
 
 if __name__ == '__main__':
     app.run()
