@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semantic Scholar Paper Search</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th.title, td.title {
+            width: 50%; 
+        }
+        th.abstract, td.abstract {
+            width: 30%;
+        }
+
+        th.download-link, td.download-link {
+            width: 10%;
+        }
+
+        th.link, td.link {
+            width: 10%;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer; /* Add cursor style for clickable headers */
+        }
+
+        button {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Semantic Scholar Paper Search</h1>
+    <form method="POST">
+        <label for="author_name">Author Name:</label>
+        <input type="text" name="author_name" id="author_name" required>
+        <input type="submit" value="Search">
+    </form>
+
+    <h2>Search Results:</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Abstract</th>
+            <th>Download Link</th>
+            <th>Link</th>
+        </tr>
+        {% for paper in paper_info %}
+            <tr>
+                <td><strong>{{ paper.title }}</strong></td>
+                <td>{{ paper.abstract }}</td>
+                <td><a href="{{ paper.Downloadlink }}" target="_blank">{{ paper.Downloadlink }}</a></td>
+                <td><a href="{{ paper.Link }}" target="_blank">{{ paper.Link }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
