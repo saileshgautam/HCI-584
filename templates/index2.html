@@ -2,40 +2,9 @@
 <html>
 <head>
     <title>Semantic Scholar Paper Search</title>
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th.title, td.title {
-            width: 50%; 
-        }
-        th.abstract, td.abstract {
-            width: 30%;
-        }
-
-        th.download-link, td.download-link {
-            width: 10%;
-        }
-
-        th.link, td.link {
-            width: 10%;
-        }
-        th {
-            background-color: #f2f2f2;
-            cursor: pointer; /* Add cursor style for clickable headers */
-        }
-        td.compact {
-            width: 100px;
-        }
-
         button {
             margin-bottom: 10px;
         }
@@ -50,21 +19,29 @@
     </form>
 
     <h2>Search Results:</h2>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Abstract</th>
-            <th>Download Link</th>
-            <th>Link</th>
-        </tr>
-        {% for paper in paper_info %}
-            <tr>
-                <td><strong>{{ paper.title }}</strong></td>
-                <td>{{ paper.abstract }}</td>
-                <td class="compact"><a href="{{ paper.Downloadlink }}" target="_blank">Download</a></td>
-                <td class="compact"><a href="{{ paper.Link }}" target="_blank">View Paper</a></td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div id="search-results"></div>
+    <script type="text/javascript">
+        var searchResults = [
+            {% for paper in paper_info %}
+                {title:"{{ paper.title }}", abstract:"{{ paper.abstract }}", downloadLink:"{{ paper.DownloadLink }}", paperLink:"{{ paper.Link }}"},
+            {% endfor %}
+         ];
+        const renderLink = (cell, formatterParams) => {
+            console.log(formatterParams)
+            return `<a target="_blank" href="${cell.getValue()}">${formatterParams.labelField}</a>`
+        }
+        var table = new Tabulator("#search-results", {
+            // height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+            data:searchResults, //assign data to table
+            layout:"fitColumns", //fit columns to width of table (optional)
+            columns:[ //Define Table Columns
+                {title:"Title", field:"title"},
+                {title:"Abstract", field:"abstract"},
+                {title:"Download", field:"downloadLink", maxWidth: 100, formatter:renderLink, formatterParams: {labelField: "Download"}},
+                {title:"View", field:"paperLink", maxWidth: 100, formatter:renderLink, formatterParams: {labelField: "View"}},
+            ],
+        });
+
+    </script>
 </body>
 </html>
