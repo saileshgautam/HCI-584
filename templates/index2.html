@@ -32,6 +32,9 @@
             background-color: #f2f2f2;
             cursor: pointer; /* Add cursor style for clickable headers */
         }
+        td.compact {
+            width: 100px;
+        }
 
         button {
             margin-bottom: 10px;
@@ -58,8 +61,8 @@
             <tr>
                 <td><strong>{{ paper.title }}</strong></td>
                 <td>{{ paper.abstract }}</td>
-                <td><a href="{{ paper.Downloadlink }}" target="_blank">{{ paper.Downloadlink }}</a></td>
-                <td><a href="{{ paper.Link }}" target="_blank">{{ paper.Link }}</a></td>
+                <td class="compact"><a href="{{ paper.Downloadlink }}" target="_blank">Download</a></td>
+                <td class="compact"><a href="{{ paper.Link }}" target="_blank">View Paper</a></td>
             </tr>
         {% endfor %}
     </table>
