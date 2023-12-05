@@ -60,3 +60,5 @@ Make sure you have the following prerequisites installed on your system:
 ![Main Page Image](Images/With%20Affiliation.png)
 ### Error Message if numeric value is given for search
 ![Main Page Image](Images/Error%20Message.png)
+### Sorting
+![Main Page Image](Images/Sorting.png)
