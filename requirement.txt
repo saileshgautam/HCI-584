@@ -1,0 +1,6 @@
+# You need these non-standard packages to run my app.py
+# To install them, type pip -r requirements.txt 
+
+
+Flask => 3.0.0
+semanticscholar => 0.5.0
