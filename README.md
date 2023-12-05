@@ -53,8 +53,10 @@ Make sure you have the following prerequisites installed on your system:
 7. Click on the download link to download the paper to your device.
 ## User Interface
 ### Website Main Page
-
-
-
-
-   
+![Main Page Image](Images/Main%20Page.png)
+### Searching papers without affiliation
+![Main Page Image](Images/Without%20Affiliation.png)
+### Searching papers with affiliation
+![Main Page Image](Images/With%20Affiliation.png)
+### Error Message if numeric value is given for search
+![Main Page Image](Images/Error%20Message.png)
