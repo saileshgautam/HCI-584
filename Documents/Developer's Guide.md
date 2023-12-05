@@ -29,15 +29,15 @@ IV.	Sort according to descending Published date.
 7.	User now can download the paper and view semantic scholar website where it is stored.
 ### Flow
 #### Website Main Page
-![Main Page Image](Images/Main%20Page.png)
+![Main Page Image](../Images/Main%20Page.png)
 #### Searching papers without affiliation
-![Main Page Image](Images/Without%20Affiliation.png)
+![Main Page Image](../Images/Without%20Affiliation.png)
 #### Searching papers with affiliation
-![Main Page Image](Images/With%20Affiliation.png)
+![Main Page Image](../Images/With%20Affiliation.png)
 #### Error Message if numeric value is given for search
-![Main Page Image](Images/Error%20Message.png)
+![Main Page Image](../Images/Error%20Message.png)
 #### Sorting
-![Main Page Image](Images/Sorting.png)
+![Main Page Image](../Images/Sorting.png)
 ## Code Structure
 The main Flask application (app.py) is responsible for handling user requests and rendering templates. The project is organized into several modules:
   app.py: Contains the main Flask application and routes.
