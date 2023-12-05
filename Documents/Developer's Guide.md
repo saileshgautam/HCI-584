@@ -17,8 +17,8 @@ The user interaction flow in Semantic Scholar Paper Search involves the followin
 1.	User accesses the web application by navigating to the application URL.
 2.	The application's main page is displayed which contains two text entry fields for author name and affiliation.
 3.	Users have two options:
-I.	Enter only the author’s name leaving the affiliation field blank. This will import the first list from the raw data given by Semantic Scholar API.
-II.	Enter both author name and affiliation. This will filter the raw data and extract the list of papers that are affiliated with the given affiliation. Note: If an affiliation that is not associated with the raw dat ais given, option I will be initialized.
+    - I.	Enter only the author’s name leaving the affiliation field blank. This will import the first list from the raw data given by Semantic Scholar API.
+    - II.	Enter both author name and affiliation. This will filter the raw data and extract the list of papers that are affiliated with the given affiliation. Note: If an affiliation that is not associated with the raw data is given, option I will be initialized.
 4.	The website will display an error message if numerical value is given in author name field.
 5.	If all the values are given accordingly: title, publication date, abstract and link to view and download the paper is displayed. The program filters out the paper that is not affiliated with the given affiliation and if the paper is not open access.
 6.	Users can sort the papers based on four different options.
@@ -41,7 +41,7 @@ IV.	Sort according to descending Published date.
 ## Code Structure
 The main Flask application (app.py) is responsible for handling user requests and rendering templates. The project is organized into several modules:
   app.py: Contains the main Flask application and routes.
-  index.html: Contains html and java scripts to render the website. All the function like sorting, making table, displaying error message and making text hyperlink are done in html file.
+  index.html: Contains html and java scripts to render the website. All the functions like sorting, making table, displaying error message and making text hyperlink are done in html file.
 ## Modules
     * flask: The Flask web framework.
     * semantic scholar: To access the Semantic Scholar API.
@@ -49,6 +49,6 @@ The main Flask application (app.py) is responsible for handling user requests an
     * search_paper_by_author (author_name, affiliation): Takes author name and affiliation and search in Semantic Scholar.
     * filter_by_affiliation(data, affiliation): Filters the data given by semantic scholar API based on the affiliation provided by the users.
     * index(): Handles the logic for rendering the HTML page and processing form submissions.
-    * error(): Handles the situation when error happens. Specially to return to the main page.
+    * error(): Handles the situation when error happens. Especially to return to the main page.
 ## Known Issues
-The page will display out of Bound error if user provide the author name that is not registered or who does not have paper in semantic scholar.
+The page will display out of Bound error if user provide the author's name that is not registered or who does not have paper in semantic scholar.
