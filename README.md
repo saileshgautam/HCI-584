@@ -35,7 +35,7 @@ Make sure you have the following prerequisites installed on your system:
 1. Launch the application by running the app.py file.
 
    ```bash
-   python app.py
+   python main.py
 2. Open your web browser and go to [http://127.0.0.1:5001](http://127.0.0.1:5001).
 
 3. Type the desired author name and affiliation associated with the author.
