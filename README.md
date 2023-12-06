@@ -32,7 +32,7 @@ Make sure you have the following prerequisites installed on your system:
 
 ## Usage
 
-1. Launch the application by running the app.py file.
+1. Launch the application by running the main.py file.
 
    ```bash
    python main.py
