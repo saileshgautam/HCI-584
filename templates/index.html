@@ -1,145 +1,255 @@
 <!DOCTYPE html>
-<html>
-    <!-- Code for Error message -->
-    <div id="error-message">
-        {% if error_message %}
-        <p style="color: red; font-size: 16px; font-weight: bold; text-transform: uppercase;">{{ error_message }}</p>
-            
-        {% endif %}
-    </div>
-<head>
-    <title>Semantic Scholar Paper Search</title> <!-- Title page of website -->
+<html lang="en">
+  <!-- Code for Error message -->
+  <div id="error-message">
+    {% if error_message %}
+    <p
+      style="
+        color: red;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+      "
+    >
+      {{ error_message }}
+    </p>
+
+    {% endif %}
+  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Scholar Paper Search</title>
     <style>
-        /* Size and style of table formatted on the website*/
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+      header {
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        padding: 1em;
+        width: 100%;
+      }
 
-        th.title, td.title {
-            width: 50%; 
-        }
-        th.abstract, td.abstract {
-            width: 30%;
-        }
+      main {
+        margin: 20px;
+        width: 80%;
+      }
 
-        th.download-link, td.download-link {
-            width: 10%;
-        }
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
 
-        th.link, td.link {
-            width: 10%;
-        }
-        th {
-            background-color: #f2f2f2;
-            cursor: pointer;
-        }
+      label {
+        margin-bottom: 5px;
+      }
 
-        button {
-            margin-bottom: 10px;
-        }
+      input[type="text"] {
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"],
+      button {
+        padding: 10px;
+        background-color: #ff8c00;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      select {
+        padding: 8px;
+        margin-bottom: 20px;
+      }
+
+      #author_name,
+      #affiliation {
+        font-family: "Times New Roman", serif; /* Change to your desired font */
+        font-size: 18px; /* Adjust the size as needed */
+        margin-bottom: 10px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 12px;
+      }
+
+      th {
+        background-color: #3498db;
+        color: white;
+        cursor: pointer;
+      }
+
+      a {
+        color: #ff0000;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      h2 {
+        font-weight: bold;
+        color: #006400; /* Green color */
+        margin-top: 20px;
+      }
+
+      h3 {
+        font-weight: bold;
+        color: #ff69b4; /* Pink color */
+        margin-bottom: 10px;
+      }
     </style>
-</head>
-<body>
-    <h1>Semantic Scholar Paper Search</h1>
-    <!-- Text Entry boxes -->
-    <form method="POST">
+  </head>
+  <body>
+    <header>
+      <h1>Semantic Scholar Paper Search</h1>
+    </header>
+    <main>
+      <form method="POST">
         <label for="author_name">Author Name:</label>
-        <input type="text" name="author_name" id="author_name" value="{{ author_name }}" required>
-        <br>
-        <label for="affiliation">Affiliation</label>
-        <input type="text" name="affiliation" id="affiliation" value="{{ affiliation }}">
-        <input type="submit" value="Search">
-    </form>
+        <input
+          type="text"
+          name="author_name"
+          id="author_name"
+          value="{{ author_name }}"
+          required
+        />
+        <br />
+        <label for="affiliation">Affiliation:</label>
+        <input
+          type="text"
+          name="affiliation"
+          id="affiliation"
+          value="{{ affiliation }}"
+        />
+        <br />
+        <input type="submit" value="Search" />
+      </form>
 
-    <!-- Added "Sort By" dropdown button -->
-    <label for="sort_by">Sort By:</label>
-    <select id="sort_by" onchange="sortTable()">
+      <label for="sort_by">Sort By:</label>
+      <select id="sort_by" onchange="sortTable()">
         <option value="atoz">A-Z Ascending</option>
         <option value="ztoa">Z-A Descending</option>
         <option value="year_asc">Year Ascending</option>
         <option value="year_desc">Year Descending</option>
-    </select>
-    
+      </select>
 
+      <h2>
+        Search Results for open access articles for {{ author_name }}{% if
+        affiliation %} with Affiliation {{ affiliation }}{% else %} with no
+        Affiliation{% endif %}:
+      </h2>
+      <h3>
+        Click on the Download and View link to Open and Download the article:
+      </h3>
 
-    <h2>Search Results for open access article for {{ author_name }}{% if affiliation %} with Affiliation {{ affiliation }}{% else %} with no Affiliation{% endif %}:</h2>
-    <h3>Click on the Download and View link to Open and Download the article:</h3>
-    <!-- Header on the table -->
-    <table id="papersTable">
+      <table id="papersTable">
         <tr>
-            <th>Title</th>
-            <th>Published Year</th>
-            <th>Abstract</th>
-            <th>Download Link</th>
-            <th>View Link</th>
+          <th>Title</th>
+          <th>Published Year</th>
+          <th>Abstract</th>
+          <th>Download Link</th>
+          <th>View Link</th>
         </tr>
-        <!-- Iterating and displaying each information -->
         {% for paper in paper_info %}
-            <tr>
-                <td><strong>{{ paper.title }}</strong></td>
-                <td>{{ paper.year }}</td>
-                <td>{{ paper.abstract }}</td>
-                <td><a href="{{ paper.Downloadlink }}" target="_blank">{{ paper.Downloadlink }}</a></td>
-                <td><a href="{{ paper.Link }}" target="_blank">{{ paper.Link }}</a></td>
-            </tr>
+        <tr>
+          <td><strong>{{ paper.title }}</strong></td>
+          <td>{{ paper.year }}</td>
+          <td>{{ paper.abstract }}</td>
+          <td>
+            <a href="{{ paper.Downloadlink }}" target="_blank">Download</a>
+          </td>
+          <td><a href="{{ paper.Link }}" target="_blank">View</a></td>
+        </tr>
         {% endfor %}
-    </table>
-    <!-- Code to sort the table -->
+      </table>
+    </main>
+
     <script>
-        function sortTable() {
-            // Get the value of the selected option in the "Sort By" dropdown
-            var sortBy = document.getElementById("sort_by").value;
-            
-            // Get the table, rows, and initialize variables for the sorting process
-            var table, rows, switching, i, x, y, shouldSwitch;
-            table = document.getElementById("papersTable");
-            switching = true;
-    
-            // Outer loop for the sorting process
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-    
-                // Inner loop to iterate through each row and compare adjacent rows
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    
-                    // Get the content of the cells in the current and next rows
-                    x = rows[i].getElementsByTagName("td")[0]; // Assuming sorting based on the first column (Title)
-                    y = rows[i + 1].getElementsByTagName("td")[0];
-    
-                    // Implement sorting logic based on the selected option (sortBy)
-                    switch (sortBy) {
-                        case "atoz":
-                            shouldSwitch = x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase();
-                            break;
-                        case "ztoa":
-                            shouldSwitch = x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase();
-                            break;
-                        case "year_asc":
-                            shouldSwitch = x.innerHTML > y.innerHTML;
-                            break;
-                        case "year_desc":
-                            shouldSwitch = x.innerHTML < y.innerHTML;
-                            break;
-                        // If developer want to update, add more cases for additional sorting options if needed
-                    }
-    
-                    // If a switch is needed, rearrange the rows in the table
-                    if (shouldSwitch) {
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                    }
-                }
+      function sortTable() {
+        // Get the value of the selected option in the "Sort By" dropdown
+        var sortBy = document.getElementById("sort_by").value;
+
+        // Get the table, rows, and initialize variables for the sorting process
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("papersTable");
+        switching = true;
+
+        // Outer loop for the sorting process
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+
+          // Inner loop to iterate through each row and compare adjacent rows
+          for (i = 1; i < rows.length - 1; i++) {
+            shouldSwitch = false;
+
+            // Get the content of the cells in the current and next rows
+            x = rows[i].getElementsByTagName("td")[0]; // Assuming sorting based on the first column (Title)
+            y = rows[i + 1].getElementsByTagName("td")[0];
+
+            // Extract the year part for comparison
+            var xYear = extractYear(x.innerHTML);
+            var yYear = extractYear(y.innerHTML);
+
+            // Implement sorting logic based on the selected option (sortBy)
+            switch (sortBy) {
+              case "atoz":
+                shouldSwitch =
+                  x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase();
+                break;
+              case "ztoa":
+                shouldSwitch =
+                  x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase();
+                break;
+              case "year_asc":
+                shouldSwitch = xYear > yYear;
+                break;
+              case "year_desc":
+                shouldSwitch = xYear < yYear;
+                break;
+              // If you want to add more cases for additional sorting options, update here
             }
+
+            // If a switch is needed, rearrange the rows in the table
+            if (shouldSwitch) {
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
         }
+      }
+
+      // Function to extract the year part from the date string (assuming YYYY-MM-DD format)
+      function extractYear(dateString) {
+        // Split the date string by '-'
+        var dateParts = dateString.split("-");
+
+        // The year should be the first part
+        var year = dateParts[0];
+
+        return year;
+      }
     </script>
-</body>
+  </body>
 </html>
